@@ -120,10 +120,67 @@ do
             break;
 
         case "2":
-            // List all of our current pet information
-            Console.WriteLine("this app feature is coming soon - please check back to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
+            string anotherPet = "y";
+            int petCount = 0;
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    petCount += 1;
+                }
+            }
+            if (petCount < maxPets)
+            {
+                Console.WriteLine($"We currently have {petCount} pets that need homes. We can manage {(maxPets - petCount)} more.");
+            }
+            while (anotherPet == "y" && petCount < maxPets)
+            {
+                petCount = petCount + 1;
+                if (petCount < maxPets)
+                {
+                    Console.WriteLine("Do you want to enter info for another pet (y/n)");
+                    do
+                    {
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            anotherPet = readResult.ToLower();
+                        }
+
+                    } while (anotherPet != "y" && anotherPet != "n");
+                }
+                if (anotherPet == "y")
+                {
+                    Console.WriteLine("Enter the species: ");
+                    readResult = Console.ReadLine();
+                    ourAnimals[petCount, 1] = "Species: " + readResult;
+
+                    ourAnimals[petCount, 0] = "ID #: " + readResult[0] + petCount;
+
+                    Console.WriteLine("Enter the Age: ");
+                    readResult = Console.ReadLine();
+                    ourAnimals[petCount, 2] = "Age: " + readResult;
+
+                    Console.WriteLine("Enter the Nickname: ");
+                    readResult = Console.ReadLine();
+                    ourAnimals[petCount, 3] = "Nickname: " + readResult;
+
+                    Console.WriteLine("Enter the Physical description: ");
+                    readResult = Console.ReadLine();
+                    ourAnimals[petCount, 4] = "Physical description: " + readResult;
+
+                    Console.WriteLine("Enter the Personality: ");
+                    readResult = Console.ReadLine();
+                    ourAnimals[petCount, 5] = "Personality: " + readResult;
+                }
+            }
+            if (petCount >= maxPets)
+            {
+                Console.WriteLine("We have reached our limit on the number of pets that we can manage.");
+                Console.WriteLine("Press the Enter key to continue.");
+                readResult = Console.ReadLine();
+            }
+
             break;
 
         case "3":
